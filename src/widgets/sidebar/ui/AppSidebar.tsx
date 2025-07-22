@@ -1,4 +1,4 @@
-import { Home, Inbox } from "lucide-react";
+import { Home, Inbox, Plus } from "lucide-react";
 
 import {
   Sidebar,
@@ -14,8 +14,12 @@ import {
 import { SignOut } from "@/features/auth";
 import Link from "next/link";
 
-// Menu items.
 const items = [
+  {
+    title: "Новый спор",
+    url: "/disputes/new",
+    icon: Plus,
+  },
   {
     title: "Главное",
     url: "/dashboard",
@@ -38,7 +42,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton className={item.url === "/disputes/new" ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear" : ""} asChild>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

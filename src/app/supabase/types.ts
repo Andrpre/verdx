@@ -50,6 +50,45 @@ export type Database = {
           },
         ]
       }
+      arguments: {
+        Row: {
+          content: string | null
+          created_at: string
+          dispute_id: number | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          dispute_id?: number | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          dispute_id?: number | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "arguments_dispute_id_fkey"
+            columns: ["dispute_id"]
+            isOneToOne: false
+            referencedRelation: "disputes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "arguments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dispute_participants: {
         Row: {
           argument: string | null
@@ -93,26 +132,26 @@ export type Database = {
         Row: {
           created_at: string
           created_by: string | null
-          description: string | null
+          description: string
           id: number
-          status: string | null
-          title: string | null
+          status: Database["public"]["Enums"]["dispute_status"]
+          title: string
         }
         Insert: {
           created_at?: string
           created_by?: string | null
-          description?: string | null
+          description?: string
           id?: number
-          status?: string | null
-          title?: string | null
+          status: Database["public"]["Enums"]["dispute_status"]
+          title?: string
         }
         Update: {
           created_at?: string
           created_by?: string | null
-          description?: string | null
+          description?: string
           id?: number
-          status?: string | null
-          title?: string | null
+          status?: Database["public"]["Enums"]["dispute_status"]
+          title?: string
         }
         Relationships: [
           {
@@ -189,7 +228,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      dispute_status: "open" | "resolved" | "rejected" | "pending"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -316,6 +355,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      dispute_status: ["open", "resolved", "rejected", "pending"],
+    },
   },
 } as const

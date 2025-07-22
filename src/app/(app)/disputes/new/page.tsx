@@ -1,3 +1,11 @@
+import { TitlePage } from "@/shared/ui/title-page";
+import { CreateDisputeForm } from "@/features/dispute";
+
 export default function NewDisputePage() {
-  return <h1 className="text-2xl font-bold">➕ Новый спор</h1>;
+  return (
+    <>
+      <TitlePage>Создание нового спора</TitlePage>
+      <CreateDisputeForm />
+    </>
+  );
 }

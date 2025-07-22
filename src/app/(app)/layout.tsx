@@ -29,10 +29,12 @@ export default async function RootLayout({
     <>
       <SidebarProvider>
         <AppSidebar />
-        <main className="flex gap-4">
+        <div className="flex gap-4 w-full p-2">
           <SidebarTrigger />
-          {children}
-        </main>
+          <main className="flex flex-col gap-8 w-2xl">
+            {children}
+          </main>
+        </div>
       </SidebarProvider>
     </>
   );
