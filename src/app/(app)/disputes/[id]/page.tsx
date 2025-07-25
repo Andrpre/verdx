@@ -1,6 +1,6 @@
+import { createClient } from "@/app/supabase/server";
 import { Dispute } from "@/entities/disputes";
 import { TitlePage } from "@/shared/ui/title-page";
-import { createClient } from "@/app/supabase/server";
 
 interface PageProps {
   params: {
@@ -23,7 +23,11 @@ export default async function DisputePage({ params }: PageProps) {
   return (
     <>
       <TitlePage>Спор #{data.id}</TitlePage>
-      <Dispute title={data.title} description={data.description} status={data.status} />
+      <Dispute
+        title={data.title}
+        description={data.description}
+        status={data.status}
+      />
     </>
   );
 }

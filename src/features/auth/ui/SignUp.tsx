@@ -15,12 +15,12 @@ import {
   CardTitle,
 } from "@/shared/ui/card";
 import { Input } from "@/shared/ui/input";
-import { Label } from "@/shared/ui/label";
 import { Loader2Icon } from "lucide-react";
 
 export function SignUp({ className, ...props }: React.ComponentProps<"div">) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -28,8 +28,9 @@ export function SignUp({ className, ...props }: React.ComponentProps<"div">) {
 
     setLoading(true);
     try {
-      await signUp(email, password);
+      await signUp(email, password, username);
 
+      setUsername("");
       setEmail("");
       setPassword("");
 
@@ -56,9 +57,16 @@ export function SignUp({ className, ...props }: React.ComponentProps<"div">) {
           <form onSubmit={handleSignUp}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="email">Почта</Label>
                 <Input
-                  id="email"
+                  type="text"
+                  placeholder="Логин"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="grid gap-3">
+                <Input
                   type="email"
                   placeholder="m@example.com"
                   value={email}
@@ -67,10 +75,9 @@ export function SignUp({ className, ...props }: React.ComponentProps<"div">) {
                 />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="password">Пароль</Label>
                 <Input
-                  id="password"
                   type="password"
+                  placeholder="Пароль"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required

@@ -37,7 +37,6 @@ export function SignIn({ className, ...props }: React.ComponentProps<"div">) {
       setEmail("");
       setPassword("");
 
-      toast.success("Вы успешно авторизовались");
       router.replace("/");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Неизвестная ошибка");
